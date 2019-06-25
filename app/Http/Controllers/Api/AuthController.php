@@ -71,7 +71,6 @@ class AuthController extends Controller{
 
             return response()->json(['success' => $user], 200); 
         }
-        // Persist user record to database
         return response()->json(['error' => $user], 400); 
     }
 
