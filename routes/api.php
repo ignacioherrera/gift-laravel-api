@@ -13,14 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+*/
 Route::prefix('v1')->group(function(){
+    /*Without auth*/
     Route::post('login', 'Api\AuthController@login');
     Route::post('register', 'Api\AuthController@register');
+
+    /*With auth*/
     Route::group(['middleware' => 'auth:api'], function(){
-    Route::post('getuser', 'Api\AuthController@getUser');
+        Route::post('getuser', 'Api\AuthController@getUser');
+        Route::post('user/updateprofile', 'Api\AuthController@updateProfile');
+        
     });
    });
