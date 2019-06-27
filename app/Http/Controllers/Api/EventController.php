@@ -14,11 +14,10 @@ class EventController extends Controller
     public function store(Request $request){
         $validator = Validator::make($request->all(), [ 
             'name' => 'required',
-            'for_user' => 'required',
-            'date' => 'required'
+            'event_date' => 'required'
         ]);   
         if ($validator->fails()) {          
-            return response()->json(['error'=>$validator->errors()], 400);             
+            return response()->json(['error'=>$input], 400);             
         }    
         $input = $request->all();
         $input['creator_id'] = Auth::user()->id;
@@ -27,8 +26,11 @@ class EventController extends Controller
     }
     public function getAll(Request $request){
         $user = Auth::user();
-        if($request->has('actives') && $request->input('actives')){
+        if($request->has('actives') && $request->input('actives')==='true'){
             return Event::where('active', 1)->get();
+        }
+        else{
+            return Event::all();
         }
     }
 }

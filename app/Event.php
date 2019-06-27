@@ -8,12 +8,12 @@ class Event extends Model
 {
     //
     protected $fillable = [
-        'name', 'date', 'active','for_user', 'user_id'
+        'name', 'event_date', 'active','for_user', 'user_id', 'creator_id'
     ];
 
     protected $attributes = [
         'for_user' => false,
-        'user_id' => '',
+        'user_id' => null,
         'active' => true
     ];
 
