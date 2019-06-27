@@ -42,4 +42,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function eventsDedicated(){
+        return $this->hasMany('App\Event','user_id');
+    }
+    public function eventsInvolved($actives=false){
+        if($actives) return $this->belongsToMany(App\Event::class, 'event_user')->where();
+        return $this->belongsToMany(App\Event::class, 'event_user');
+    }
 }
