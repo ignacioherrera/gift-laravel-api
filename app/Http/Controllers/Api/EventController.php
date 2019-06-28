@@ -15,11 +15,15 @@ class EventController extends Controller
         $validator = Validator::make($request->all(), [ 
             'name' => 'required',
             'event_date' => 'required'
-        ]);   
+        ]);
+        $input = $request->all();   
         if ($validator->fails()) {          
-            return response()->json(['error'=>$input], 400);             
-        }    
-        $input = $request->all();
+            return response()->json(['error'=>$validator->errors()], 400);             
+        }
+        if(($input['for_user']===true || $input['for_user']==='true') && $input['user_id']==''){
+            return response()->json(['error'=>['user_id'=>'The user is required']], 400);  
+        } 
+        
         $input['creator_id'] = Auth::user()->id;
         $event = Event::create($input); 
         return response()->json(['success'=>$event], 200);            
