@@ -28,5 +28,6 @@ Route::prefix('v1')->group(function(){
         Route::post('user/updateprofile', 'Api\AuthController@updateProfile');
         Route::post('event/store', 'Api\EventController@store');
         Route::get('event/getall', 'Api\EventController@getAll');
+        Route::get('user/getall', 'Api\AuthController@getAll');
     });
    });

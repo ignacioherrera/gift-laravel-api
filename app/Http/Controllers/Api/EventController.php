@@ -27,10 +27,12 @@ class EventController extends Controller
     public function getAll(Request $request){
         $user = Auth::user();
         if($request->has('actives') && $request->input('actives')==='true'){
-            return Event::where('active', 1)->get();
+            $events = Event::where('active', 1)->get();
+            return response()->json(['success'=>$events], 200);     
         }
         else{
-            return Event::all();
+            $events = Event::all();
+            return response()->json(['success'=>$events], 200);     
         }
     }
 }
