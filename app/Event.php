@@ -20,5 +20,9 @@ class Event extends Model
     public function eventsInvolved(){
         return $this->belongsToMany(App\User::class, 'event_user');
     }
+    public function messages()
+    {
+    return $this->hasMany(Message::class);
+    }
 
 }

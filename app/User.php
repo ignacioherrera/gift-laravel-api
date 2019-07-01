@@ -49,4 +49,8 @@ class User extends Authenticatable
         if($actives) return $this->belongsToMany(App\Event::class, 'event_user')->where();
         return $this->belongsToMany(App\Event::class, 'event_user');
     }
+    public function messages()
+    {
+    return $this->hasMany(Message::class);
+    }
 }
